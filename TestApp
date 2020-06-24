@@ -1,0 +1,94 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+
+
+class MyApp extends StatefulWidget{
+
+  _MyAppState createState() => _MyAppState();
+
+}
+
+
+class _MyAppState extends State<MyApp>{
+
+  Color _color = Color( 0xFFFFFF);
+  Random _random = new Random();
+
+  double _randX =0.5;
+  double _randY = 0.5;
+  double _randSize = 20;
+
+  void _changeDesign ()
+  {
+    setState(() {
+
+      //Changes Background color
+      _color = Color.fromARGB(
+               _random.nextInt(256),
+               _random.nextInt(256),
+               _random.nextInt(256),
+               _random.nextInt(256));
+
+      //Changes text coordinates
+      _randX = _random.nextDouble();
+      _randY = _random.nextDouble();
+
+      //Changes text size
+      _randSize = _random.nextInt(40).toDouble();
+    });
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+        appBar: AppBar( title: Text("Test")),
+
+        body:   GestureDetector(
+
+          child:  Container(
+
+            decoration: new BoxDecoration(color: _color),
+
+            child: new Align(
+
+              alignment: FractionalOffset(_randX ,_randY),
+
+              child: new Text("Hey there",style: TextStyle(fontSize: _randSize))
+
+            ),
+
+          ),
+          onTap: () {
+
+            _changeDesign();
+
+          },
+        )
+    );
+  }
+}
+
+void main() {
+  runApp(
+
+    new MaterialApp(
+
+      debugShowCheckedModeBanner: false,
+
+      home: MyApp()
+
+    )
+  );
+
+}
+
+
+
+
+
+                
